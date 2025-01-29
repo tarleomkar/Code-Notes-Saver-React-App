@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromPastes } from "../redux/pasteSlice";
+import toast from "react-hot-toast";
 
 const Paste = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -29,15 +30,30 @@ const Paste = () => {
         {filteredData.length > 0 ? (
           filteredData.map(
             (paste) => (
-            <div key={paste._id} className="border p-3 rounded-md">
+            <div key={paste?._id} className="border p-3 rounded-md">
               <div>{paste.title}</div>
               <div>{paste.content}</div>
               <div className="flex flex-row gap-4 place-content-evenly">
                 <button>Edit</button>
                 <button>View</button>
                 <button onClick={() => handleDelete(paste?._id)}>Delete</button>
-                <button>Copy</button>
-                <button>Share</button>
+                <button onClick={() => {
+                  navigator.clipboard.writeText(paste?.content)
+                  toast.success("Copied to clipborad")
+                }}>Copy</button>
+
+                <button onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({
+                      title: paste.title,
+                      text: paste.title,
+                      url: window.location.href,
+                    }).then(() => toast.success("Shared Sucessfully!"))
+                    .catch(() => toast.error("Failed to share"))
+                  } else {
+                    toast.error("Sharong not supported on this device")
+                  }
+                }}>Share</button>
               </div>
               <div>
                 {paste.createdAt}
