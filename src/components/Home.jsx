@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { addToPastes, updateToPastes } from "../redux/pasteSlice";
 
@@ -9,6 +9,17 @@ const Home = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const pasteID = searchParams.get("pasteId");
     const dispatch = useDispatch()
+    const allPastes = useSelector((state) => state.paste.pastes)
+
+    useEffect(() => {
+        console.log("Inside use effect");
+        if(pasteID) {
+            const paste = allPastes.find((p) => p._id === pasteID);
+            console.log("Page Found");
+            setTitle(paste.title)
+            setValue(paste.content)
+        }
+    }, [pasteID])
 
     function createPaste() {
         const paste = {
@@ -17,7 +28,6 @@ const Home = () => {
             _id: pasteID || 
                 Date.now().toString(36),
                 createdAt:new Date().toISOString(),
-
         }
         if(pasteID) {
             // update
@@ -36,7 +46,7 @@ const Home = () => {
 
   return (
     <div>
-            <div className="flex flex-row gap-7 place-content-between">
+        <div className="flex flex-row gap-7 place-content-between">
         <input 
         className="p-1 rounded-2xl mt-2 w-[66%] pl-4"
         type="text"

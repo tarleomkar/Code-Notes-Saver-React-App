@@ -34,8 +34,12 @@ const Paste = () => {
               <div>{paste.title}</div>
               <div>{paste.content}</div>
               <div className="flex flex-row gap-4 place-content-evenly">
-                <button>Edit</button>
-                <button>View</button>
+                <button>
+                  <a href={`/?pasteId=${paste?._id}`}>Edit</a>
+                </button>
+                <button>
+                  <a href={`/pastes/${paste?._id}`}>View</a>
+                </button>
                 <button onClick={() => handleDelete(paste?._id)}>Delete</button>
                 <button onClick={() => {
                   navigator.clipboard.writeText(paste?.content)
