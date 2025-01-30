@@ -40,11 +40,14 @@ http://localhost:3000
 
 🖼️ Screenshots
 Home Page
-![31NUlRl3eAL _AC_](https://github.com/user-attachments/assets/27c39a0d-2cc0-4024-89fa-3dc81ee7afe4)
 Add new pastes with a title and content.
+![Vite + React - Brave 30-01-2025 17_28_01](https://github.com/user-attachments/assets/30a33400-fa50-4f7d-86c9-7de5f75ead37)
+
 
 Pastes Page
 View, edit, copy, share, or delete your saved pastes.
+![Pictures - File Explorer 30-01-2025 17_28_53](https://github.com/user-attachments/assets/573e1e55-3d8a-4cd7-9303-46ca3497ec4b)
+
 
 📂 Folder Structure
 Code-Notes-Saver-React-App/
